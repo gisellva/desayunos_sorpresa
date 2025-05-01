@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Desayunos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'desayunos/estilos.css' %}">
+</head>
+<body>
+    <h1>Desayunos Registrados</h1>
+    <ul>
+        {% for desayuno in desayunos %}
+            <li>
+                <strong>{{ desayuno.nombre }}</strong> - {{ desayuno.descripcion }} - ${{ desayuno.precio }} 
+                {% if desayuno.disponible %}(Disponible){% else %}(No disponible){% endif %}
+            </li>
+        {% empty %}
+            <li>No hay desayunos registrados.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'crear_desayuno' %}">Registrar nuevo desayuno</a>
+</body>
+</html>
