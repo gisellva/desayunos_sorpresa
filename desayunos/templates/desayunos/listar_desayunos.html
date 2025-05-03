@@ -12,6 +12,8 @@
             <li>
                 <strong>{{ desayuno.nombre }}</strong> - {{ desayuno.descripcion }} - ${{ desayuno.precio }} 
                 {% if desayuno.disponible %}(Disponible){% else %}(No disponible){% endif %}
+                <a href="{% url 'eliminar_desayuno' desayuno.id %}" style="color: red;">Eliminar</a>
+                <a href="{% url 'editar_desayuno' desayuno.id %}">Editar</a>
             </li>
         {% empty %}
             <li>No hay desayunos registrados.</li>
