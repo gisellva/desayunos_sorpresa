@@ -1,25 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Lista de Desayunos</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'desayunos/estilos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <style>
+        body {
+            background-color: #fff5f8;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #ff5ca2;
+            margin-top: 20px;
+        }
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        .card {
+            background-color: white;
+            border: 2px solid #ffb6d9;
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            font-size: 20px;
+            color: #333;
+        }
+        .card p {
+            margin: 10px 0;
+            color: #555;
+        }
+        .acciones a {
+            display: block;
+            margin: 5px 0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .eliminar {
+            color: pink;
+        }
+        .editar {
+            color: rgb(188, 188, 255);
+        }
+        .nuevo {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-decoration: none;
+            font-size: 18px;
+            color: #ff5ca2;
+            border: 2px solid #ff5ca2;
+            border-radius: 5px;
+            padding: 8px 12px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
     <h1>Desayunos Registrados</h1>
-    <ul>
+    <div class="contenedor">
         {% for desayuno in desayunos %}
-            <li>
-                <strong>{{ desayuno.nombre }}</strong> - {{ desayuno.descripcion }} - ${{ desayuno.precio }} 
-                {% if desayuno.disponible %}(Disponible){% else %}(No disponible){% endif %}
-                <a href="{% url 'eliminar_desayuno' desayuno.id %}" style="color: red;">Eliminar</a>
-                <a href="{% url 'editar_desayuno' desayuno.id %}">Editar</a>
-            </li>
+            <div class="card">
+                <h2>{{ desayuno.nombre }}</h2>
+                <p>{{ desayuno.descripcion }}</p>
+                <p>Precio: ${{ desayuno.precio }}</p>
+                <p>Estado: {% if desayuno.disponible %}Disponible{% else %}No disponible{% endif %}</p>
+                <div class="acciones">
+                    <a href="{% url 'eliminar_desayuno' desayuno.id %}" class="eliminar">Eliminar</a>
+                    <a href="{% url 'editar_desayuno' desayuno.id %}" class="editar">Editar</a>
+                </div>
+            </div>
         {% empty %}
-            <li>No hay desayunos registrados.</li>
+            <p>No hay desayunos registrados.</p>
         {% endfor %}
-    </ul>
-    <br>
-    <a href="{% url 'crear_desayuno' %}">Registrar nuevo desayuno</a>
+    </div>
+    <a href="{% url 'crear_desayuno' %}" class="nuevo">Registrar nuevo desayuno</a>
 </body>
 </html>

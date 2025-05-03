@@ -60,13 +60,20 @@ button:hover {
 }
 
 a {
-    color: #0077cc;
-    text-decoration: none;
-    display: block;
-    margin-top: 10px;
-    text-align: center;
+  
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(10%);
+            text-decoration: none;
+            font-size: 18px;
+            color: #ff5ca2;
+            border: 2px solid #ff5ca2;
+            border-radius: 5px;
+            padding: 8px 12px;
+            background-color: white;
 }
 
 a:hover {
     text-decoration: underline;
 }
+
